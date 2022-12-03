@@ -41,6 +41,37 @@ Console.WriteLine($"Day 2 Part 1 challenge answer: {totalPoints}");
 Console.WriteLine($"Day 2 Part 2 challenge answer: {totalPointsWithModifiedStrategy}");
 
 //Day 3
+//Part 1
+string[] itemsInRucksacks = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, @"Day 3\Rucksacks.txt"));
+
+int sumOfPriorities = itemsInRucksacks.Select(x =>
+{
+    string firstCompartment = x.Substring(0, x.Length / 2);
+    string secondCompartment = x.Substring(x.Length / 2, x.Length / 2);
+
+    char commonChar = firstCompartment.First(c => secondCompartment.Contains(c));
+
+    return Char.IsUpper(commonChar) ? commonChar - 38 : commonChar - 96;
+}).Sum();
+
+//Part 2
+int badgeSum = 0;
+
+for (int i = 0; i < itemsInRucksacks.Length; i+=3)
+{
+    string firstElfRucksack = itemsInRucksacks[i];
+    string secondElfRucksack = itemsInRucksacks[i+1];
+    string thirdElfRucksack = itemsInRucksacks[i+2];
+
+    char commonChar = firstElfRucksack.Intersect(secondElfRucksack).First(c => thirdElfRucksack.Contains(c));
+
+    badgeSum = badgeSum + (Char.IsUpper(commonChar) ? commonChar - 38 : commonChar - 96);
+}
+
+//Result
+Console.WriteLine($"Day 3 Part 1 challenge answer: {sumOfPriorities}");
+Console.WriteLine($"Day 3 Part 2 challenge answer: {badgeSum}");
+
 
 //Day 4
 
