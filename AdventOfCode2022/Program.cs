@@ -1,7 +1,7 @@
 ﻿using AdventOfCode2022.Day_1;
 using AdventOfCode2022.Day_2;
 
-//Day 1
+#region Day 1
 //Part 1
 string[] calories = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, @"Day 1\ElfCalories.txt"));
 var caloriesCalculator = new CaloriesCalculator(calories);
@@ -16,7 +16,9 @@ int topThreeElvesTotalCalories = elvesAndTotalCalories.OrderByDescending(x => x.
 Console.WriteLine($"Day 1 Part 1 challenge answer: {mostCalories}");
 Console.WriteLine($"Day 1 Part 2 challenge answer: {topThreeElvesTotalCalories}");
 
-//Day 2
+#endregion
+
+#region Day 2
 //Part 1
 string[] strategyGuide = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, @"Day 2\RockPaperScissorsStrategyGuide.txt"));
 int totalPoints = strategyGuide.Select(x => x.Split(" ")).Select(y =>
@@ -40,7 +42,9 @@ int totalPointsWithModifiedStrategy = strategyGuide.Select(x => x.Split(" ")).Se
 Console.WriteLine($"Day 2 Part 1 challenge answer: {totalPoints}");
 Console.WriteLine($"Day 2 Part 2 challenge answer: {totalPointsWithModifiedStrategy}");
 
-//Day 3
+#endregion
+
+#region Day 3
 //Part 1
 string[] itemsInRucksacks = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, @"Day 3\Rucksacks.txt"));
 
@@ -72,11 +76,72 @@ for (int i = 0; i < itemsInRucksacks.Length; i+=3)
 Console.WriteLine($"Day 3 Part 1 challenge answer: {sumOfPriorities}");
 Console.WriteLine($"Day 3 Part 2 challenge answer: {badgeSum}");
 
+#endregion
 
 //Day 4
+//Part 1
+string[] sectionAssignmentPairs = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, @"Day 4\ListOfSectionAssignmentPairs.txt"));
+
+int assigmentsWhereOneRangeFullyContainTheOther = sectionAssignmentPairs.Select(x =>
+{
+    var pairOfElves = x.Split(",");
+
+    var firstElfAssigment = pairOfElves[0].Split("-");
+    var secondElfAssigment = pairOfElves[1].Split("-");
+
+    int x1 = int.Parse(firstElfAssigment[0]);
+    int x2 = int.Parse(firstElfAssigment[1]);
+
+    int y1 = int.Parse(secondElfAssigment[0]);
+    int y2 = int.Parse(secondElfAssigment[1]);
+
+    if ((x1 <= y1 && x2 >= y2) || (y1 <= x1 && y2 >= x2))
+    {
+        return 1;
+    }
+
+    return 0;
+}).Sum();
+
+//Part 2
+int assigmentsWhereOneRangeOverlapTheOther = sectionAssignmentPairs.Select(x =>
+{
+    var pairOfElves = x.Split(",");
+
+    var firstElfAssigment = pairOfElves[0].Split("-");
+    var secondElfAssigment = pairOfElves[1].Split("-");
+
+    int x1 = int.Parse(firstElfAssigment[0]);
+    int x2 = int.Parse(firstElfAssigment[1]);
+
+    int y1 = int.Parse(secondElfAssigment[0]);
+    int y2 = int.Parse(secondElfAssigment[1]);
+
+    if ((x1 < y1 && x2 < y1) || (y1 < x1 && y2 < x1))
+    {
+        return 0;
+    }
+
+    return 1;
+}).Sum(); ;
+
+//Result
+Console.WriteLine($"Day 4 Part 1 challenge answer: {assigmentsWhereOneRangeFullyContainTheOther}");
+Console.WriteLine($"Day 4 Part 2 challenge answer: {assigmentsWhereOneRangeOverlapTheOther}");
 
 //Day 5
 
 //Day 6
 
 //Day 7
+
+//Day 8
+
+//Day 9
+
+//Day 10
+
+//Day 11
+//Day 12
+//Day 13
+//Day 14
