@@ -1,5 +1,6 @@
 ﻿using AdventOfCode2022.Day_1;
 using AdventOfCode2022.Day_2;
+using AdventOfCode2022.Day_6;
 using System.Diagnostics;
 
 #region Day 1
@@ -209,7 +210,20 @@ Console.WriteLine($"Day 5 Part 2 challenge answer: {topCratesAcrossTheStacksForC
 
 #endregion
 
-//Day 6
+#region Day 6
+//Part 1
+string dataStreamBuffer = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Day 6\DataStreamBuffer.txt"));
+
+int startOfPackerMarker = MarkerPositionCalculator.CalculateMarkerPosition(dataStreamBuffer, 4);
+
+//Part 2
+int startOfMessageMarker = MarkerPositionCalculator.CalculateMarkerPosition(dataStreamBuffer, 14);
+
+//Result
+Console.WriteLine($"Day 6 Part 1 challenge answer: {startOfPackerMarker}");
+Console.WriteLine($"Day 6 Part 2 challenge answer: {startOfMessageMarker}");
+
+#endregion
 
 //Day 7
 
