@@ -1,5 +1,6 @@
 ﻿using AdventOfCode2022.Day_1;
 using AdventOfCode2022.Day_2;
+using System.Diagnostics;
 
 #region Day 1
 //Part 1
@@ -78,7 +79,7 @@ Console.WriteLine($"Day 3 Part 2 challenge answer: {badgeSum}");
 
 #endregion
 
-//Day 4
+#region Day 4
 //Part 1
 string[] sectionAssignmentPairs = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, @"Day 4\ListOfSectionAssignmentPairs.txt"));
 
@@ -129,7 +130,84 @@ int assigmentsWhereOneRangeOverlapTheOther = sectionAssignmentPairs.Select(x =>
 Console.WriteLine($"Day 4 Part 1 challenge answer: {assigmentsWhereOneRangeFullyContainTheOther}");
 Console.WriteLine($"Day 4 Part 2 challenge answer: {assigmentsWhereOneRangeOverlapTheOther}");
 
-//Day 5
+#endregion
+
+#region Day 5
+var stacks = new Dictionary<int, Stack<char>>() 
+{
+    { 1, new Stack<char>(new[] { 'B', 'V', 'S', 'N', 'T', 'C', 'H', 'Q' }) },
+    { 2, new Stack<char>(new[] { 'W', 'D', 'B', 'G' }) },
+    { 3, new Stack<char>(new[] { 'F', 'W', 'R', 'T', 'S', 'Q', 'B' }) },
+    { 4, new Stack<char>(new[] { 'L', 'G', 'W', 'S', 'Z', 'J', 'D', 'N' }) },
+    { 5, new Stack<char>(new[] { 'M', 'P', 'D', 'V', 'F' }) },
+    { 6, new Stack<char>(new[] { 'F', 'W', 'J' }) },
+    { 7, new Stack<char>(new[] { 'L', 'N', 'Q', 'B', 'J', 'V' }) },
+    { 8, new Stack<char>(new[] { 'G', 'T', 'R', 'C', 'J', 'Q', 'S', 'N' }) },
+    { 9, new Stack<char>(new[] { 'J', 'S', 'Q', 'C', 'W', 'D', 'M' }) }
+};
+
+var stacksForCrateMover9001 = new Dictionary<int, Stack<char>>()
+{
+    { 1, new Stack<char>(new[] { 'B', 'V', 'S', 'N', 'T', 'C', 'H', 'Q' }) },
+    { 2, new Stack<char>(new[] { 'W', 'D', 'B', 'G' }) },
+    { 3, new Stack<char>(new[] { 'F', 'W', 'R', 'T', 'S', 'Q', 'B' }) },
+    { 4, new Stack<char>(new[] { 'L', 'G', 'W', 'S', 'Z', 'J', 'D', 'N' }) },
+    { 5, new Stack<char>(new[] { 'M', 'P', 'D', 'V', 'F' }) },
+    { 6, new Stack<char>(new[] { 'F', 'W', 'J' }) },
+    { 7, new Stack<char>(new[] { 'L', 'N', 'Q', 'B', 'J', 'V' }) },
+    { 8, new Stack<char>(new[] { 'G', 'T', 'R', 'C', 'J', 'Q', 'S', 'N' }) },
+    { 9, new Stack<char>(new[] { 'J', 'S', 'Q', 'C', 'W', 'D', 'M' }) }
+};
+
+//Part 1
+string[] rearrangementProcedure = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, @"Day 5\RearrangementProcedure.txt"));
+
+foreach (var x in rearrangementProcedure)
+{
+    var arr = x.Split(" ");
+
+    int howManyToMove = int.Parse(arr[1]);
+    int fromWhichStack = int.Parse(arr[3]);
+    int toWhichStack = int.Parse(arr[5]);
+
+    while (howManyToMove > 0)
+    {
+        char crate = stacks[fromWhichStack].Pop();
+        stacks[toWhichStack].Push(crate);
+        howManyToMove--;
+    }
+}
+
+string topCratesAcrossTheStacks = String.Join("", stacks.Select(x => x.Value.Peek()));
+
+//Part 2
+foreach (var x in rearrangementProcedure)
+{
+    var arr = x.Split(" ");
+
+    int howManyToMove = int.Parse(arr[1]);
+    int fromWhichStack = int.Parse(arr[3]);
+    int toWhichStack = int.Parse(arr[5]);
+
+    var cratesToMove = new List<char>();
+
+    while (howManyToMove > 0)
+    {
+        cratesToMove.Add(stacksForCrateMover9001[fromWhichStack].Pop());
+        howManyToMove--;
+    }
+
+    cratesToMove.Reverse();
+    cratesToMove.ForEach(x => stacksForCrateMover9001[toWhichStack].Push(x));
+}
+
+string topCratesAcrossTheStacksForCrateMover9001 = String.Join("", stacksForCrateMover9001.Select(x => x.Value.Peek()));
+
+//Result
+Console.WriteLine($"Day 5 Part 1 challenge answer: {topCratesAcrossTheStacks}");
+Console.WriteLine($"Day 5 Part 2 challenge answer: {topCratesAcrossTheStacksForCrateMover9001}");
+
+#endregion
 
 //Day 6
 
@@ -142,6 +220,31 @@ Console.WriteLine($"Day 4 Part 2 challenge answer: {assigmentsWhereOneRangeOverl
 //Day 10
 
 //Day 11
+
 //Day 12
+
 //Day 13
+
 //Day 14
+
+//Day 15
+
+//Day 16
+
+//Day 17
+
+//Day 18
+
+//Day 19
+
+//Day 20
+
+//Day 21
+
+//Day 22
+
+//Day 23
+
+//Day 24
+
+//Day 25
