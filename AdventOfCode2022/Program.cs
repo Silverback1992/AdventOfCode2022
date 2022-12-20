@@ -1,6 +1,7 @@
 ﻿using AdventOfCode2022.Day_1;
 using AdventOfCode2022.Day_2;
 using AdventOfCode2022.Day_6;
+using AdventOfCode2022.Day_8;
 using System.Diagnostics;
 
 #region Day 1
@@ -225,9 +226,46 @@ Console.WriteLine($"Day 6 Part 2 challenge answer: {startOfMessageMarker}");
 
 #endregion
 
-//Day 7
+#region Day 7
+//Part 1
 
-//Day 8
+//Part 2
+
+//Result
+
+#endregion
+
+#region Day 8
+//Part 1
+string[] treeHeights = File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, @"Day 8\TreeHeights.txt"));
+//Visible on the edge:
+int visibleTrees = treeHeights.Length * 2 + (treeHeights[0].Length - 2) * 2;
+
+var trees = TreeObjectCreatorService.CreateTreeObjects(treeHeights);
+
+visibleTrees = visibleTrees + trees.Count(tree =>
+{
+    return VisibilityChecker.IsVisibleFromTheTop(treeHeights, tree) ||
+           VisibilityChecker.IsVisibleFromTheBottom(treeHeights, tree) ||
+           VisibilityChecker.IsVisibleFromTheLeft(treeHeights, tree) ||
+           VisibilityChecker.IsVisibleFromTheRight(treeHeights, tree);
+});
+
+//Part 2
+int maxScenicSore = trees.Select(tree =>
+{
+    return ScenicScoreCalculatorService.TreesVisibleLookingAtTheTop(treeHeights, tree) *
+           ScenicScoreCalculatorService.TreesVisibleLookingAtTheBottom(treeHeights, tree) *
+           ScenicScoreCalculatorService.TreesVisibleLookingAtTheLeft(treeHeights, tree) *
+           ScenicScoreCalculatorService.TreesVisibleLookingAtTheRight(treeHeights, tree);
+
+}).Max();
+
+//Result
+Console.WriteLine($"Day 8 Part 1 challenge answer: {visibleTrees}");
+Console.WriteLine($"Day 8 Part 2 challenge answer: {maxScenicSore}");
+
+#endregion
 
 //Day 9
 
